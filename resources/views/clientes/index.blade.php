@@ -178,25 +178,22 @@ let map;
 let markers = [];
 let tempMarker = null;
 
-// Inicializar mapa
 function initMap() {
-    // Coordenadas por defecto (puedes cambiarlas por tu ciudad)
+   
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
         center: { lat: -12.0464, lng: -77.0428 }, // Lima, Perú
         mapTypeId: 'roadmap'
     });
 
-    // Cargar puntos existentes
     cargarPuntos();
 
-    // Agregar listener para clicks en el mapa
     map.addListener('click', function(e) {
         agregarMarcadorTemporal(e.latLng);
     });
 }
 
-// Cargar puntos desde el servidor
+
 function cargarPuntos() {
     fetch('/api/clientes/coordenadas')
         .then(response => response.json())
@@ -209,7 +206,6 @@ function cargarPuntos() {
         .catch(error => console.error('Error:', error));
 }
 
-// Agregar marcador al mapa
 function agregarMarcador(punto) {
     const marker = new google.maps.Marker({
         position: { lat: parseFloat(punto.latitud), lng: parseFloat(punto.longitud) },
