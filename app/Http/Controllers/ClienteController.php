@@ -12,7 +12,10 @@ class ClienteController extends Controller
     {
         $query = Cliente::query();
 
-       
+        // Filtrar por categoría si se proporciona
+        if ($request->has('categoria') && $request->categoria != '') {
+            $query->categoria($request->categoria);
+        }
 
         // Buscar por término si se proporciona
         if ($request->has('buscar') && $request->buscar != '') {
